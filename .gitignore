@@ -1,0 +1,21 @@
+## Build results
+bin/
+obj/
+
+## Visual Studio cache/options
+.vs/
+*.user
+*.suo
+
+## Entity Framework
+*.db
+*.db-shm
+*.db-wal
+
+## User-specific files
+appsettings.Development.json
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db
