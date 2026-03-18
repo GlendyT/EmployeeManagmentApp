@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Employee.api.Model
 {
     [Table("employeeTbl")]
-    public class Employee
+    public class EmployeeModel
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int employeeId { get; set; }
@@ -23,5 +23,15 @@ namespace Employee.api.Model
         public int designationId { get; set; }
         public DateTime createdDate { get; set; }
         public DateTime modifiedDate { get; set; }
+        public string role { get; set; } = string.Empty;
+    }
+
+    public class LoginDto
+    {
+        [Required]
+        [EmailAddress]
+        public string email { get; set; } = string.Empty;
+        [Required]
+        public string contactNo { get; set; } = string.Empty;
     }
 }
