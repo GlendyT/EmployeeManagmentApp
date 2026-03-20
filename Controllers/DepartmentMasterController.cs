@@ -26,6 +26,13 @@ namespace Employee.api.Controllers
         [HttpPost("AddDepartment")]
         public IActionResult AddDepartment([FromBody] Department dept)
         {
+            // Check if department name already exists (case-insensitive)
+            bool exists = _context.Departments.Any(d => d.departmentName.ToLower() == dept.departmentName.ToLower());
+
+            if (exists)
+            {
+                return BadRequest("Department name must be unique");
+            }
             _context.Departments.Add(dept);
             _context.SaveChanges();
             return Ok("Department added succesfully");
