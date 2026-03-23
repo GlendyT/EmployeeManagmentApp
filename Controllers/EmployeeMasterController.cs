@@ -194,10 +194,10 @@ namespace Employee.api.Controllers
 
                 return Ok(new
                 {
-                    totalRecords = totalRecords,
-                    pageNumber = pageNumber,
-                    pageSize = pageSize,
-                    data = data
+                    TotalRecords = totalRecords,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize,
+                    Data = data
                 });
             }
             catch (Exception ex)
