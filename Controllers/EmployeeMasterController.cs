@@ -104,7 +104,6 @@ namespace Employee.api.Controllers
                 existing.state = model.state;
                 existing.pincode = model.pincode;
                 existing.address = model.address;
-                existing.designationName = model.designationName;
                 existing.designationId = model.designationId;
                 existing.modifiedDate = DateTime.Now;
 
@@ -228,7 +227,6 @@ namespace Employee.api.Controllers
                         user.name,
                         user.email,
                         user.contactNo,
-                        user.designationName,
                         user.designationId,
                         user.role
                     }
