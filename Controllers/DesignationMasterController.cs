@@ -23,12 +23,20 @@ namespace Employee.api.Controllers
         {
             try
             {
-                var data = await _context.Designations.ToListAsync();
+                var data = await (from d in _context.Designations
+                                  join dept in _context.Departments on d.departmentId equals dept.departmentId
+                                  select new
+                                  {
+                                      d.designationId,
+                                      d.designationName,
+                                      d.departmentId,
+                                      departmentName = dept.departmentName
+                                  }).ToListAsync();
                 return Ok(data);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = ex.Message });
+                return StatusCode(500, new { Message = ex.InnerException?.Message ?? ex.Message });
             }
         }
 
@@ -45,7 +53,7 @@ namespace Employee.api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Message = ex.Message });
+                return StatusCode(500, new { Message = ex.InnerException?.Message ?? ex.Message });
             }
         }
 
@@ -70,18 +78,15 @@ namespace Employee.api.Controllers
         }
 
         //UPDATE
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Designation model)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] Designation model)
         {
             try
             {
-                if (id != model.designationId)
-                    return BadRequest("ID mismatch");
-
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                var existing = await _context.Designations.FindAsync(id);
+                var existing = await _context.Designations.FindAsync(model.designationId);
                 if (existing == null)
                     return NotFound(new { Message = "Designation not found" });
 

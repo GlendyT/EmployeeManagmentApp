@@ -8,7 +8,7 @@ namespace Employee.api.Model
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int designationId { get; set; }
-        [Required, MaxLength(50)]
+        [Required]
         public int departmentId { get; set; }
         [Required, MaxLength(50)]
         public string designationName { get; set; } = string.Empty;
