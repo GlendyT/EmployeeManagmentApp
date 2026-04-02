@@ -63,7 +63,7 @@ namespace Employee.api.Controllers
 
             _context.Departments.Remove(dept);
             _context.SaveChanges();
-            return Ok("Department deleted succesfully");
+            return Created("Department deleted succesfully", dept);
         }
     }
 }
